@@ -6,6 +6,8 @@ import ContactForm from './Pages/ContactForm';
 import Aboutus from './Pages/Aboutus';
 import Shop from './Pages/Shop';
 
+import Cart from './Pages/Cart';
+
 function App() {
   return (
     <HelmetProvider>
@@ -15,6 +17,7 @@ function App() {
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/about" element={<Aboutus />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </Router>
     </HelmetProvider>

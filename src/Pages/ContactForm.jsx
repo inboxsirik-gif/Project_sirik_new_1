@@ -6,7 +6,6 @@ import { FaUser, FaEnvelope, FaPhone } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Contact_image from '../assets/images/AboutUsImage.png';
 import { Loader } from '../components/Loader';
 
 const FormSchema = z.object({
@@ -93,7 +92,7 @@ const ContactForm = () => {
                 href="mailto:team@sirikbeverages.com"
                 className="text-[#a589f5] underline"
               >
-                 team@sirikbeverages.com
+                team@sirikbeverages.com
               </a>
             </p>
           </div>
@@ -194,10 +193,6 @@ const ContactForm = () => {
               Submit Form →
             </button>
           </form>
-        </div>
-
-        <div className="w-full overflow-hidden">
-          <img src={Contact_image} alt="" className="w-full" />
         </div>
       </div>
 

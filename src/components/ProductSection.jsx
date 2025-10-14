@@ -17,8 +17,7 @@ const ProductSection = () => {
           className="mb-4 bg-white rounded-md"
         >
           <Panel className='text-lg md:text-2xl font-semibold' header="Nutrition Value per 250ml" key="1">
-            <p className="text-[16px] font-normal">
-              Total Carbohydrate - 14.5g, Dietary Fiber - 7g, Protein - 1.25g, Added Sugar - Nil, Total Sugar - 4g,
+            <p className="text-[16px] font-normal"> Total Carbohydrate - 14.5g, Dietary Fiber - 7g, Protein - 1.25g, Added Sugar - Nil, Total Sugar - 4g,
               Energy (kcal) - 82.5 kcal, Sodium - 36.75mg, Vitamin C - 182.50mg.
             </p>
           </Panel>
@@ -32,9 +31,7 @@ const ProductSection = () => {
 
         {/* Pack selection */}
       <div className="flex space-x-4 justify-center py-10">
-  <button
-    onClick={() => setSelectedPack('6')}
-    style={{ fontFamily: 'HelveticaNowText-Medium, sans-serif' }}
+  <button onClick={() => setSelectedPack('6')} style={{ fontFamily: 'HelveticaNowText-Medium, sans-serif' }}
     className={`px-10 py-2 border rounded-md transition duration-200 cursor-pointer ${
       selectedPack === '6' ? 'bg-black text-white' : 'bg-white text-black'
     }`}
