@@ -26,7 +26,8 @@ const Footer = () => {
         <div className="flex flex-col min-w-[200px] flex-1">
           <h3 className="font-semibold mb-3 text-[20px] text-[#fff]">Useful Links</h3>
           <ul className="text-sm space-y-2 text-[#ffffff]/80">
-            <li className="cursor-pointer">Shop</li>
+            <li className="cursor-pointer" onClick={() => navigate('/')}>Home</li>
+            <li className="cursor-pointer" onClick={() => navigate('/shop')}>Shop</li>
             <li className="cursor-pointer" onClick={() => navigate('/about')}>About Us</li>
             <li className="cursor-pointer" onClick={() => navigate('/contact')}>Contact Us</li>
           </ul>

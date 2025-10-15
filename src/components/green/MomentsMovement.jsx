@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
-import image_data from '../assets/images/Review_Image.png';
-import Image1 from '../assets/images/Image_1.png';
-import Image2 from '../assets/images/Image_2.png';
-import Image3 from '../assets/images/Image_3.png';
-import Image4 from '../assets/images/Image_4.png';
+import image_data from '/Review_Image.png';
+import Image1 from '/Image_1.png';
+import Image2 from '/Image_2.png';
+import Image3 from '/Image_3.png';
+import Image4 from '/Image_4.png';
 
 const testimonials = [
   { image: Image1 },
@@ -100,7 +100,7 @@ const MomentsMovement = () => {
   );
 
   return (
-    <div className="w-full py-10 px-4 md:px-10 overflow-hidden bg-[#F46C3C]">
+    <div className="w-full py-10 px-4 md:px-10 overflow-hidden bg-[#BAD42C]">
       <div
         className="container flex items-center py-5 pb-10 mx-auto text-[#ffffff]"
         style={{ fontFamily: 'quincycf, sans-serif' }}

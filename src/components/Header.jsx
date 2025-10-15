@@ -35,11 +35,11 @@ const Header = (props) => {
             <Link to='/contact' className='hover:text-primary transition'>Contact</Link>
             <Link to="/cart" className="relative inline-block">
               <img src="/cart.svg" alt="Cart" className="w-8" />
-              {/* {cartCount > 0 && (
+            {cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-[#BAD42C] text-black text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
                   {cartCount}
                 </span>
-              )} */}
+              )}
             </Link>
           </nav>
          <Link to="/cart" className="relative md:hidden inline-block">

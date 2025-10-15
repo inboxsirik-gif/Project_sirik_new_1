@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 import { motion, useAnimation, useInView } from 'framer-motion'
-import Section_11_2 from './Section_11_2'
+import Section_11_2 from '../Section_11_2'
 
 
 
