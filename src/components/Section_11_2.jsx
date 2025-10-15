@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, useAnimation, useInView } from 'framer-motion'
+import { useNavigate } from "react-router-dom";
+
 import tin_1 from '/Tin_1.svg'
 import tin_2 from '/Tin_2.svg' 
 
@@ -98,6 +100,8 @@ const Section_11_2 = () => {
   const section4RefA = useRef(null)
   const section4RefB = useRef(null)
   const floatingImgRef = useRef(null)
+
+  const navigate = useNavigate();
 
   // Refs for the two animated heading wrappers
   const leftWrapRef = useRef(null)
@@ -461,8 +465,12 @@ const Section_11_2 = () => {
              <button className='py-3 w-full max-w-[200px] cursor-pointer hover:bg-black hover:text-white border border-[#C0C3C5] rounded-xl bg-white'>Pack of 12</button>
            </div>
            <div className='w-full py-2 '>
-              <button className="py-4 w-full cursor-pointer rounded-lg bg-[#F46C3C] text-white hover:scale-105 transition-all duration-300 ease-in-out">Add to Cart</button>
-           </div>
+ <button
+      className="py-4 w-full cursor-pointer rounded-lg bg-[#F46C3C] text-white hover:scale-105 transition-all duration-300 ease-in-out"
+      onClick={() => navigate('/shop')}
+    >
+      Go to Shop
+    </button>           </div>
         </div>
 
       </div>

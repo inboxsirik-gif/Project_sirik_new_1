@@ -3,6 +3,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/cartSlice";
+
 
 import tinOrange1 from "/tinb1.png";
 import tinOrange2 from "/tino1.png";
@@ -52,6 +55,7 @@ const splitFlavours = (tins) => {
 
 
 const Shop = () => {
+  const dispatch = useDispatch();
   const [selectedPackId, setSelectedPackId] = useState("pack6");
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
@@ -90,7 +94,7 @@ const Shop = () => {
     setQuantity(1);
   };
 
-  const onAddToCart = () => {
+ const onAddToCart = () => {
     const cartItem = {
       id: selectedPack.id,
       label: selectedPack.label,
@@ -103,6 +107,12 @@ const Shop = () => {
       product: selectedProduct,
       addedAt: new Date().toISOString(),
     };
+
+    dispatch(addToCart(cartItem)); // ✅ Redux dispatch
+
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1800);
+
 
     try {
       let currentCart = [];
@@ -277,7 +287,7 @@ const Shop = () => {
                     onClick={onAddToCart}
                     style={{ fontFamily: "quincycf, sans-serif",
     backgroundColor: current.color, }}
-                    className="w-full max-w-xl cursor-pointer mx-auto block text-white py-5 rounded-2xl text-lg font-semibold"
+                    className="w-full  cursor-pointer mx-auto block text-white py-5 rounded-2xl text-lg font-semibold"
 
                   >
                     ADD TO CART
@@ -290,7 +300,7 @@ const Shop = () => {
                 </div>
 
                 {/* 🟢 Product toggle (below Add to Cart) */}
-                <div className="flex justify-center items-center gap-4 mt-6">
+                <div className="flex justify-left items-center gap-4 mt-10">
                   <img
                     src={tinOrange2}
                     alt="Gutzy Nannari"

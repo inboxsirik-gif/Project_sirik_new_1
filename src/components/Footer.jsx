@@ -37,10 +37,10 @@ const Footer = () => {
         <div className="flex flex-col min-w-[200px] flex-1">
           <h3 className="font-semibold mb-3 text-[20px] text-[#fff]">Helps</h3>
           <ul className="text-sm space-y-2 text-[#ffffff]/80">
-            <li className="cursor-pointer">Shipping & Delivery Policy</li>
-            <li className="cursor-pointer">Refund & Return Policy</li>
-            <li className="cursor-pointer">Privacy Policy</li>
-            <li className="cursor-pointer">Terms and Conditions</li>
+            <li className="cursor-pointer" onClick={() => navigate('/Shipping-Delivery-policy')} >Shipping & Delivery Policy</li>
+            <li className="cursor-pointer" onClick={() => navigate('/refund-return-policy')} >Refund & Return Policy</li>
+            <li className="cursor-pointer" onClick={() => navigate('/privacy policy')} >Privacy Policy</li>
+            <li className="cursor-pointer" onClick={() => navigate('/terms-and-conditions')} >Terms and Conditions</li>
           </ul>
         </div>
 
