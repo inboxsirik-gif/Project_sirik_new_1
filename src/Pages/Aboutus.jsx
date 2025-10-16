@@ -1,12 +1,44 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { motion } from "framer-motion";
+import AlertModal from '../components/AlertModal'
+import {useState} from "react"
 
 const Aboutus = () => {
+  const [showcartalert,setcartalert] = useState(false)
+  const onClose = ()=>{
+    setcartalert(false)
+  }
+  const show = ()=>{
+    setcartalert(true)
+  }
+
+    const items = [
+    "Don’t settle to be a second choice , Put Yourself First . Be the No.1",
+    "Don’t settle to be a second choice , Put Yourself First . Be the No.1",
+    "Don’t settle to be a second choice , Put Yourself First . Be the No.1",
+    "Don’t settle to be a second choice , Put Yourself First . Be the No.1",
+  ];
+
+  // build one visual line (the thing we will duplicate)
+  const line = (
+    <div className="inline-flex items-center whitespace-nowrap">
+      {items.map((t, i) => (
+        <span key={i} className="mx-8 text-4xl">
+          {t}
+        </span>
+      ))}
+    </div>
+  );
+
 
   return (
     <>
+     {
+      showcartalert && <AlertModal onClose={onClose}/>
+    }
      <div className='absolute top-0 z-50 w-full'>
-        <Header />
+        <Header show={show}/>
       </div>
       <div className=" bg-gradient-to-br pt-15 from-[#0F0F1C] to-[#1F1147]">
 
@@ -44,11 +76,32 @@ const Aboutus = () => {
             At SIRIK, we don’t just make beverages—we make a difference. Inspired by the vision of our founder, a portion of every sip goes toward causes that matter: empowering children through education, funding life-saving operations, protecting our seashores and preserving our forests. We believe that a great brand should refresh not just the people who drink it, but the communities and planet around it. Every can of SIRIK carries this ripple of positive change—because true success is measured by the impact we leave behind. And that’s exactly why we are not your No. 2… and we never will be.
          </p>
       </div>
-      
+   
       <div className="w-full pt-22 overflow-hidden">
         {/* <img src={Contact_image} alt="" className="w-full"/> */}
       </div>
       </div>
+
+            {/* Moving line */}
+      <div className="bg-white py-8 overflow-hidden">
+          <div className="w-full flex justify-center">
+            <motion.div
+              className="flex"                   // ensure no inline whitespace behavior
+              style={{ willChange: "transform" }}
+              // Move exactly one copy width to the left (0 -> -50%) so the second copy replaces the first
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{
+                repeat: Infinity,
+                duration: 30,
+                ease: "linear",
+              }}
+            >
+              {/* render copies directly with NO whitespace between them */}
+              {line}{line}
+            </motion.div>
+          </div>
+        </div>
+
       <div className='w-full bg-gradient-to-br from-[#0F0F1C] to-[#1F1147]'>
         <Footer/>
       </div>

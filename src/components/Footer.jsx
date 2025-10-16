@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Social_icon_1 from '../assets/images/Social_icon_1.svg';
 import Social_icon_2 from '../assets/images/Social_icon_2.svg';
 import Social_icon_3 from '../assets/images/Social_icon_3.svg';
@@ -16,9 +16,9 @@ const Footer = () => {
         <div className="flex flex-col items-center md:items-start min-w-[250px] flex-1">
           <h1 className="text-8xl mb-4 font-bold text-[#ffffff]">Sirik.</h1>
           <div className="flex gap-4 mt-2">
-            <img src={Social_icon_1} alt="Facebook" className="w-5 h-5 cursor-pointer" />
+            <img src={Social_icon_1}  alt="Facebook" className="w-5 h-5 cursor-pointer" />
             <img src={Social_icon_2} alt="Instagram" className="w-5 h-5 cursor-pointer" />
-            <img src={Social_icon_3} alt="LinkedIn" className="w-5 h-5 cursor-pointer" />
+            <Link to='https://www.linkedin.com/company/sirik-beveraage-pvt-ltd/'><img src={Social_icon_3}  alt="LinkedIn" className="w-5 h-5 cursor-pointer" /></Link>
           </div>
         </div>
 
@@ -26,10 +26,10 @@ const Footer = () => {
         <div className="flex flex-col min-w-[200px] flex-1">
           <h3 className="font-semibold mb-3 text-[20px] text-[#fff]">Useful Links</h3>
           <ul className="text-sm space-y-2 text-[#ffffff]/80">
-            <li className="cursor-pointer" onClick={() => navigate('/')}>Home</li>
-            <li className="cursor-pointer" onClick={() => navigate('/shop')}>Shop</li>
-            <li className="cursor-pointer" onClick={() => navigate('/about')}>About Us</li>
-            <li className="cursor-pointer" onClick={() => navigate('/contact')}>Contact Us</li>
+            <li className="cursor-pointer" onClick={() => {navigate('/');window.scrollTo(0,0)}}>Home</li>
+            <li className="cursor-pointer" onClick={() => {navigate('/shop');window.scrollTo(0,0)}}>Shop</li>
+            <li className="cursor-pointer" onClick={() => {navigate('/about');window.scrollTo(0,0)}}>About Us</li>
+            <li className="cursor-pointer" onClick={() =>{ navigate('/contact');window.scrollTo(0,0)}}>Contact Us</li>
           </ul>
         </div>
 
@@ -37,10 +37,10 @@ const Footer = () => {
         <div className="flex flex-col min-w-[200px] flex-1">
           <h3 className="font-semibold mb-3 text-[20px] text-[#fff]">Helps</h3>
           <ul className="text-sm space-y-2 text-[#ffffff]/80">
-            <li className="cursor-pointer" onClick={() => navigate('/Shipping-Delivery-policy')} >Shipping & Delivery Policy</li>
-            <li className="cursor-pointer" onClick={() => navigate('/refund-return-policy')} >Refund & Return Policy</li>
-            <li className="cursor-pointer" onClick={() => navigate('/privacy policy')} >Privacy Policy</li>
-            <li className="cursor-pointer" onClick={() => navigate('/terms-and-conditions')} >Terms and Conditions</li>
+            <li className="cursor-pointer" onClick={() => {navigate('/Shipping-Delivery-policy');window.scrollTo(0,0)}} >Shipping & Delivery Policy</li>
+            <li className="cursor-pointer" onClick={() => {navigate('/refund-return-policy');window.scrollTo(0,0)}} >Refund & Return Policy</li>
+            <li className="cursor-pointer" onClick={() => {navigate('/privacy policy');window.scrollTo(0,0)}} >Privacy Policy</li>
+            <li className="cursor-pointer" onClick={() => {navigate('/terms-and-conditions');window.scrollTo(0,0)}} >Terms and Conditions</li>
           </ul>
         </div>
 

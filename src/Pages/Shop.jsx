@@ -6,15 +6,18 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
 
-
-import tinOrange1 from "/tinb1.png";
 import tinOrange2 from "/tino1.png";
-import tinOrange3 from "/Tin_2.svg";
-import tinOrange4 from "/tino2.png"
-import tinOrange5 from "/tino3.png"
-import tinGreen1 from "/tinb2.png";
 import tinGreen2 from "/ting1.png";
-import tinGreen3 from "/Tin_1.svg";
+
+import tin_1 from '../assets/Resize_sirik_Avif/Orange_1.avif'
+import tin_2 from '../assets/Resize_sirik_Avif/Orange_2.avif'
+import tin_3 from '../assets/Resize_sirik_Avif/Orange_3.avif'
+
+import tin_4 from '../assets/Resize_sirik_Avif/Green_1.avif'
+import tin_5 from '../assets/Resize_sirik_Avif/Green_2.avif'
+import tin_6 from '../assets/Resize_sirik_Avif/Green_3.avif'
+
+import AlertModal from '../components/AlertModal'
 
 const PACKS = [
   { id: "pack4", label: "Pack of 4", tins: 4, price: 399 },
@@ -60,7 +63,7 @@ const Shop = () => {
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState("nannari"); // 🟠 or 🟢
-  const [mainImage, setMainImage] = useState(tinOrange1);
+  const [mainImage, setMainImage] = useState(tinOrange2);
 
   const selectedPack = PACKS.find((p) => p.id === selectedPackId) || PACKS[0];
   const totalPrice = selectedPack.price * quantity;
@@ -74,14 +77,14 @@ const Shop = () => {
       desc: "Nannari, or Indian Sarsaparilla, is an ancient root known for its cooling and digestive powers.",
       color: "#FE5E33",
       bg: "#FFEFEA",
-      images: [tinOrange2, tinOrange4, tinOrange5],
+      images: [tinOrange2,tin_1, tin_2, tin_3],
     },
     lemon: {
       name: "Gutzy Nannari × Lemon",
       desc: "A zesty fusion of Nannari root and Lemon that refreshes and energizes your day.",
       color: "#BAD42C",
       bg: "#F9FFD7",
-      images: [tinGreen2, tinGreen2, tinGreen2],
+      images: [tinGreen2,tin_4, tin_5, tin_6],
     },
   };
 
@@ -138,11 +141,25 @@ const Shop = () => {
     setMainImage(products[type].images[0]);
   };
 
+  const [showcartalert,setcartalert] = useState(false)
+  const onClose = ()=>{
+    setcartalert(false)
+  }
+  const show = ()=>{
+    setcartalert(true)
+  }
+
   return (
+    <>
+
+    {
+      showcartalert && <AlertModal onClose={onClose}/>
+    }
+
     <div className="flex flex-col min-h-screen">
       {/* Header color updates dynamically */}
       <div style={{ backgroundColor: current.color }}>
-        <Header darkcolor={true} />
+        <Header darkcolor={true} show={show} />
       </div>
 
       <div style={{ backgroundColor: current.bg }} className="flex-1">
@@ -162,7 +179,7 @@ const Shop = () => {
             </div>
 
             {/* Thumbnails */}
-            <div className="mt-8 flex items-center justify-center flex-wrap gap-4">
+            <div className=" flex items-center justify-center flex-wrap">
               {current.images.map((img, idx) => (
                 // Thumbnails now use a container with the same rounded style
                 <div
@@ -338,29 +355,31 @@ const Shop = () => {
       </div>
 
       {/* Moving line */}
-      <div className="bg-[#ffffff] py-8 overflow-hidden">
-      <div className="w-full flex justify-center">
-        <motion.div
-          className="inline-flex"
-          style={{ willChange: "transform" }}
-          animate={{ x: ["-50%", "50%"] }}
-          transition={{
-            repeat: Infinity,
-            duration: 30,
-            ease: "linear",
-          }}
-        >
-          <div style={{ fontFamily: "quincycf, sans-serif" }} className="flex">{line}</div>
-          <div style={{ fontFamily: "quincycf, sans-serif" }} className="flex">{line}</div>
-        </motion.div>
-      </div>
-    </div>
+<div className="bg-white py-8 overflow-hidden">
+    <div className="w-full flex justify-center">
+      <motion.div
+        className="flex"                   // ensure no inline whitespace behavior
+        style={{ willChange: "transform" }}
+        // Move exactly one copy width to the left (0 -> -50%) so the second copy replaces the first
+        animate={{ x: ["0%", "-50%"] }}
+        transition={{
+          repeat: Infinity,
+          duration: 30,
+          ease: "linear",
+        }}
+      >
+        {/* render copies directly with NO whitespace between them */}
+        {line}{line}
+      </motion.div>
+    </div>
+  </div>
 
 
       <div className="bg-[#1E1143]">
         <Footer />
       </div>
     </div>
+    </>
   );
 };
 

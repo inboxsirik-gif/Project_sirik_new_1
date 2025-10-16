@@ -466,7 +466,11 @@ const Section_11_2 = () => {
            <div className='w-full py-2 '>
  <button
       className="py-4 w-full cursor-pointer rounded-lg bg-[#BAD42C] text-white hover:scale-105 transition-all duration-300 ease-in-out"
-      onClick={() => navigate('/shop')}
+  onClick={() => {
+  navigate('/shop');
+  window.scrollTo(0, 0);
+}}
+
     >
       Go to Shop
     </button>              </div>

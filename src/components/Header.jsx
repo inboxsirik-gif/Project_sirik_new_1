@@ -4,11 +4,11 @@ import { MenuOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import companylogo from "../assets/images/companylogo.svg";
 
-const Header = ({ darkcolor }) => {
+
+const Header = ({ darkcolor,show }) => {
   const navigate = useNavigate();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  // ✅ Redux cart count
   const cartCount = useSelector((state) =>
     state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
   );
@@ -16,8 +16,7 @@ const Header = ({ darkcolor }) => {
   // ✅ Handle Cart Click
   const handleCartClick = () => {
     if (cartCount === 0) {
-      alert("🛒 Your cart is empty! Go to the shop to explore.");
-      navigate("/shop");
+      show()
     } else {
       navigate("/cart");
     }

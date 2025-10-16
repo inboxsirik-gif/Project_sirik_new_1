@@ -7,6 +7,9 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Loader } from '../components/Loader';
+import { motion } from "framer-motion";
+
+import AlertModal from '../components/AlertModal'
 
 const FormSchema = z.object({
   Name: z.string().min(1, "Name is required"),
@@ -67,10 +70,22 @@ const ContactForm = () => {
     }
   };
 
+  const [showcartalert,setcartalert] = useState(false)
+  const onClose = ()=>{
+    setcartalert(false)
+  }
+  const show = ()=>{
+    setcartalert(true)
+  }
+
   return (
     <>
+
+     {
+      showcartalert && <AlertModal onClose={onClose}/>
+    }
       <div className="absolute top-0 z-50 w-full">
-        <Header />
+       <Header show={show}/>
       </div>
 
       <div className="bg-gradient-to-br pt-15 from-[#0F0F1C] to-[#1F1147]">

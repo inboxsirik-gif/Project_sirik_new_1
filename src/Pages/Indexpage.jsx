@@ -2,7 +2,8 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Header from '../components/Header'
-
+import { motion } from "framer-motion";
+import AlertModal from '../components/AlertModal'
 import tin_1 from '/Tin_1.svg'
 import tin_2 from '/Tin_2.svg' 
 
@@ -17,6 +18,9 @@ import GreenMoments from '../components/green/MomentsMovement'
 import GreenSection11 from '../components/green/Section_11_11'
 
 import Footer from '../components/Footer'
+import { useNavigate } from 'react-router-dom';
+
+
 
  const Sections = [
     { section3: OrangeSection3, moments: OrangeMoments, section11: OrangeSection11 },
@@ -35,13 +39,17 @@ const Indexpage = () => {
   const scrollTriggerRef = useRef(null)
 
   const [selectedItem, setSelectedItem] = useState(0)
-  const [tinLanded, setTinLanded] = useState(false) 
+  const [tinLanded, setTinLanded] = useState(false)
+  
+  const navigate=useNavigate()
 
   // Theme colors
   const themeColors = [
     { primary: '#FF4C0D', secondary: '#ffb69b' }, // orange
     { primary: '#BAD42C', secondary: '#97ad18' }   // green
   ]
+
+
 const themeImages = [tin_1, tin_2]
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -297,10 +305,25 @@ const themeImages = [tin_1, tin_2]
   }, [tinLanded, selectedItem])
   const { section3: Section3Comp, moments: MomentsComp, section11: Section11Comp } = Sections[selectedItem]
 
+  const [showcartalert,setcartalert] = useState(false)
+  const onClose = ()=>{
+    setcartalert(false)
+  }
+  const show = ()=>{
+    setcartalert(true)
+  }
+
   return (
-    <div className='relative overflow-hidden cursor-default'>
-      <div className='absolute top-0 z-50 w-full'>
-        <Header />
+    <>
+
+    {
+      showcartalert && <AlertModal onClose={onClose}/>
+    }
+    
+
+     <div className='relative overflow-hidden cursor-default'>
+      <div className='absolute top-0 z-40 w-full'>
+        <Header show={show}/>
       </div>
 
       <div ref={containerRef}>
@@ -342,7 +365,7 @@ const themeImages = [tin_1, tin_2]
   style={{ transform: 'translate(-50%, -50%)' }}
 />
 
-          <div className='absolute hidden md:flex top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col gap-0 items-center z-50 text-center'>
+          <div className='absolute hidden md:flex top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col gap-0 items-center z-30 text-center'>
             <h1 className='text-[70px] sm:text-[60px] md:text-[100px] lg:text-[130px] xl:text-[140px] text-white text-left-entry' style={{ fontFamily: 'OntrobucjDemo, sans-serif' }}>Not</h1>
             <div className='h-[45px] sm:h-[100px] md:h-[180px] lg:h-[220px] xl:h-[240px]' />
             <h1 className='text-[70px] sm:text-[60px] md:text-[100px] lg:text-[130px] xl:text-[140px] text-white text-left-entry' style={{ fontFamily: 'OntrobucjDemo, sans-serif' }}>No.2</h1>
@@ -376,12 +399,19 @@ const themeImages = [tin_1, tin_2]
             <div className='flex-1 flex flex-col justify-center px-3'>
               <p className='text-[#6E6C6C] md:text-lg mb-10'>
 Most fizzy drinks are fun until you read the label. Sugar bombs. Chemical sweeteners. Fake flavours. Preservatives you can't pronounce. We were done with it. That's where SIRIK comes in. We're not here to cancel soda we're here to redefine it. SIRIK is a new-age carbonated drink built for people who want the fizz, the flavour, the vibe without the guilt. We use real, natural ingredients like Nannari root, known for its cooling and gut-friendly properties and pair it with Low sugar , no preservatives, prebiotics. Whether you're finishing a workout, grabbing lunch, or just craving something cold — SIRIK gives you that same satisfying soda kick, just cleaner.              </p>
-              <div className='bg-black text-white flex items-center w-fit text-lg rounded-full p-2'>
+              <div onClick={()=>{navigate('/about');window.scrollTo(0,0)}} className='bg-black cursor-pointer text-white flex items-center w-fit text-lg rounded-full p-2'>
                 <h1 style={{ fontFamily: 'quincycf, sans-serif' }} className='px-4'>About us</h1>
                 <img src='/arrow.svg' className='w-12 h-12'/>
               </div>
             </div>
-            <div ref={aboutTinTargetRef} className="flex-1 hidden lg:flex items-center justify-center bg-[radial-gradient(circle_at_center,_rgba(255,100,50,0.3)_0%,_rgba(255,255,255,1)_70%)]">
+     <div
+  ref={aboutTinTargetRef}
+  className={`flex-1 hidden lg:flex items-center justify-center ${
+    selectedItem === 0
+      ? "bg-[radial-gradient(circle_at_center,_rgba(255,100,50,0.3)_0%,_rgba(255,255,255,1)_70%)]"
+      : "bg-[radial-gradient(circle_at_center,_rgba(198,219,85,0.3)_0%,_rgba(255,255,255,1)_70%)]"
+  }`}
+>
             </div>
           </div>
         </div>
@@ -398,7 +428,7 @@ Most fizzy drinks are fun until you read the label. Sugar bombs. Chemical sweete
               <p className='text-[#6E6C6C] md:text-lg mb-5'>
                  Hey! I’m Srikar YS — a former engineer, full-time flavour rebel .I didn’t grow up dreaming about beverages. I wasn’t born with a silver can in my hand. I came from chaos. There were moments I felt like I wasn’t even worth holding on to, easy to leave behind, easy to ignore. I was pushed down deep into a place with no light, no clarity just noise and questions. But what I thought was a pit…Turned out to be a forge. “A forge doesn’t save you. It remakes you.” They create Weapons. Warriors. Legends. That’s where SIRIK was born. Not from a market trend or branding playbook  but from pure, unfiltered fire. This isn’t just a beverage brand. It’s proof that you can be broken, underestimated, even forgotten and still Rise. Sharper than ever. I didn’t come from a boardroom. I came from the FIRE.   
               </p>
-              <div className='bg-black text-white flex items-center w-fit text-lg rounded-full p-2'>
+                <div onClick={()=>{navigate('/about');window.scrollTo(0,0)}}  className='bg-black text-white flex items-center w-fit text-lg rounded-full p-2'>
                 <h1 style={{ fontFamily: 'quincycf, sans-serif' }} className='px-4'>About us</h1>
                 <img src='/arrow.svg' className='w-12 h-12'/>
               </div>
@@ -415,7 +445,11 @@ Most fizzy drinks are fun until you read the label. Sugar bombs. Chemical sweete
       <div className='bg-[#1E1143]'>
         <Footer/>
       </div>
+
+     
     </div>
+    </>
+   
   )
 }
 

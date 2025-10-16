@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import tin_1 from '/Tin_1.svg'
 import tin_2 from '/Tin_2.svg' // <-- corrected import
+import { useNavigate } from 'react-router-dom'
 
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v))
 const lerp = (a, b, t) => a + (b - a) * t
@@ -9,6 +10,8 @@ const FloatingTin = ({ startRef, endRef, imgRef, offset = 0 }) => {
   // imgRef is the DOM node of the fixed image
   const rafRef = useRef(null)
   const lastTopRef = useRef(null)
+
+ 
 
   useEffect(() => {
     const onScrollOrResize = () => {
@@ -70,7 +73,7 @@ const Section_3 = () => {
   const section4RefA = useRef(null) // first flavor (Gutzy Nannari)
   const section4RefB = useRef(null) // second flavor (Gutzy Nannari X Lemon)
   const floatingImgRef = useRef(null)
-
+  const navigate =useNavigate()
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 1024 : false)
 
   useEffect(() => {
@@ -217,7 +220,7 @@ const Section_3 = () => {
                 { text: 'No Artificial Chemicals', color: '#F0562D' },
                 { text: 'No Preservatives', color: '#EA4F26' },
                 { text: 'No Added Sugar', color: '#CD3A14' },
-                { text: '100% Plant Based', color: '#B83310' },
+                { text: '100 Plant Based', color: '#B83310' },
               ].map((item, index) => (
                 <h3
                   key={index}
@@ -259,7 +262,7 @@ const Section_3 = () => {
               <p className='text-[#6E6C6C] md:text-lg mb-5'>
                 Nannari, or Indian Sarsaparilla, is an ancient root known for its cooling and digestive powers. It helps detox, soothes acidity, and keeps your system balanced. With SIRIK, we’ve turned this timeless remedy into a crisp, fizzy drink that’s gut-friendly, refreshing and built for today’s lifestyle.
               </p>
-              <div className='bg-black text-white flex items-center w-fit text-lg rounded-full p-2'>
+              <div  onClick={()=>{navigate('/shop');window.scrollTo(0,0)}}  className='bg-black  cursor-pointer text-white flex items-center w-fit text-lg rounded-full p-2'>
                 <h1 style={{ fontFamily: 'quincycf, sans-serif' }} className='px-4'>Shop</h1>
                 <img src='/arrow.svg' className='w-12 h-12' />
               </div>
@@ -317,7 +320,7 @@ const Section_3 = () => {
                     <hr className='my-1 border-black' />
 
                     <div className='flex items-center gap-4'>
-                        <h1 className='text-5xl font-semibold w-full max-w-[90px]'>8g</h1>
+                        <h1 className='text-5xl font-semibold w-full max-w-[90px]'>0</h1>
                         <p className='text-sm text-[#4A4A4A] pt-4'>Nothing fake. No chemicals hiding behind fancy labels. Just clean, fresh ingredients bottled under strict quality control — made to feel as real as it tastes.</p>
                     </div>
                 </div>
@@ -338,7 +341,7 @@ const Section_3 = () => {
               <p className='text-[#6E6C6C] md:text-lg mb-5'>
                 Ancient root(Nannari) just met its citrus match. Nannari soothes and detoxes from within, while lemon energizes with a bright, zesty twist. It’s your gut’s favorite soda — refreshing, functional, and zero guilt
               </p>
-              <div className='bg-black text-white flex items-center w-fit text-lg rounded-full p-2'>
+              <div  onClick={()=>{navigate('/shop');window.scrollTo(0,0)}} className='bg-black  cursor-pointer text-white flex items-center w-fit text-lg rounded-full p-2'>
                 <h1 style={{ fontFamily: 'quincycf, sans-serif' }} className='px-4'>Shop</h1>
                 <img src='/arrow.svg' className='w-12 h-12' />
               </div>
@@ -396,7 +399,7 @@ const Section_3 = () => {
                     <hr className='my-1 border-black' />
 
                     <div className='flex items-center gap-4'>
-                        <h1 className='text-5xl font-semibold w-full max-w-[90px]'>8g</h1>
+                        <h1 className='text-5xl font-semibold w-full max-w-[90px]'>0</h1>
                         <p className='text-sm text-[#4A4A4A] pt-4'>Nothing fake. No chemicals hiding behind fancy labels. Just clean, fresh ingredients bottled under strict quality control — made to feel as real as it tastes.</p>
                     </div>
                 </div>

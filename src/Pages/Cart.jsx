@@ -1,37 +1,66 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateQuantity } from "../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { AlertTriangle } from "lucide-react";
 
-// Modal Component
+// Modal Component (in-file)
 const Modal = ({ show, onClose }) => {
   if (!show) return null;
+
   return (
-    <div className="fixed inset-0 bg-opacity-80 flex items-center justify-center z-50">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-lg transform transition-all duration-300 scale-100">
-        <div className="flex justify-center mb-6">
-          <span className="text-6xl text-yellow-600">⏳</span>
-        </div>
-        <h3 className="text-3xl font-extrabold text-gray-900 mb-4 text-center">
-          Hold Tight! We're Optimizing!
-        </h3>
-        <p className="text-gray-700 mb-6 text-center text-lg">
-          Currently, we're <b>fine-tuning our checkout</b> system for a smoother experience.
+    <div
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 bg-black/20 bg-opacity-60 flex items-center justify-center z-50 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        transition={{ duration: 0.28, ease: "easeOut" }}
+        onClick={(e) => e.stopPropagation()} // prevent backdrop click from closing when clicking inside
+        className="bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-lg text-center"
+      >
+        {/* Animated warning icon with subtle pulse */}
+        <motion.div
+          initial={{ rotate: -8 }}
+          animate={{
+            rotate: [0, -8, 8, -8, 0],
+            scale: [1, 1.06, 1.02, 1.06, 1],
+            boxShadow: [
+              "0 0 0 rgba(198,219,85,0)",
+              "0 12px 30px rgba(198,219,85,0.18)",
+              "0 0 0 rgba(198,219,85,0)",
+            ],
+          }}
+          transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
+          className="flex justify-center mb-6"
+        >
+          <div className="rounded-full p-1 bg-gradient-to-br from-yellow-50 to-yellow-100">
+            <AlertTriangle className="w-16 h-16 text-yellow-500" />
+          </div>
+        </motion.div>
+
+        <h3 className="text-3xl font-extrabold text-gray-900 mb-4">Thanks for Your Order!</h3>
+        <p className="text-gray-700 mb-6 text-lg">
+          We’re currently <b>not accepting any orders</b> as we’re improving our checkout system.
         </p>
-        <p className="text-gray-500 mb-8 text-center">
-          <b>We will process your checkout soon!</b> Please try again in a little while. Thank you for your patience!
-        </p>
-        <div className="flex justify-center">
-          <button
-            onClick={onClose}
-            className="px-8 py-3 bg-[#FE5E33] hover:bg-opacity-90 text-white font-bold rounded-xl transition shadow-md"
-          >
-            Got It!
-          </button>
-        </div>
-      </div>
+        <p className="text-gray-500 mb-8">You’ll receive a notification once we’re back online. Thanks for your patience 💛</p>
+
+        <motion.button
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.96 }}
+          onClick={onClose}
+          className="px-8 py-3 bg-[#FE5E33] cursor-pointer hover:bg-opacity-90 text-white font-bold rounded-xl transition shadow-md"
+        >
+          Got It!
+        </motion.button>
+      </motion.div>
     </div>
   );
 };
@@ -40,6 +69,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart.items);
+
   const [showCheckoutModal, setShowCheckoutModal] = useState(false);
 
   const formatINR = (value) =>
@@ -48,17 +78,18 @@ const Cart = () => {
       currency: "INR",
     }).format(value);
 
-  const subtotal = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+  const subtotal = cart.reduce((sum, item) => sum + (item.totalPrice || 0), 0);
   const flatRate = 1;
   const estimatedTotal = subtotal + flatRate;
 
   const handleCheckoutClick = () => {
+    // show modal that informs users orders are currently disabled
     setShowCheckoutModal(true);
   };
 
   // Empty cart handler
   const handleCartClick = () => {
-    if (cart.length === 0) {
+    if (!cart || cart.length === 0) {
       alert("🛒 Your cart is empty! Redirecting to shop...");
       navigate("/shop");
     }
@@ -72,12 +103,12 @@ const Cart = () => {
         <Header darkcolor={true} />
       </div>
 
-      <div className="container h-[100dvh] mx-auto px-6 py-10 grid md:grid-cols-3 gap-10">
+      <div className="container h-[100dvh] mx-auto px-3 md:px-6 py-10 grid md:grid-cols-3 gap-10">
         {/* Left side */}
-        <div className="md:col-span-2 pl-7">
+        <div className="md:col-span-2 md:pl-7">
           <h2 className="text-4xl font-bold mb-6">Cart</h2>
 
-          {cart.length === 0 ? (
+          {(!cart || cart.length === 0) ? (
             <div className="text-center text-gray-600 mt-20">
               <p>Your cart is empty!</p>
               <button
@@ -89,43 +120,22 @@ const Cart = () => {
             </div>
           ) : (
             cart.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-center justify-between border-b border-gray-200 py-6"
-              >
+              <div key={item.id} className="flex items-center justify-between border-b border-gray-200 py-6">
                 <div className="flex items-center space-x-4">
-                  <img
-                    src="/Sirik_tin_1.svg"
-                    alt={item.label}
-                    className="w-20 h-20 rounded-md object-cover"
-                  />
+                  <img src={item.image || '/tin2.avif'} alt={item.label} className="w-12 h-12 md:w-24 md:h-24 rounded-md object-cover" />
                   <div>
                     <h3 className="font-semibold text-gray-800">{item.label}</h3>
-                    <p className="text-sm text-gray-600 mt-1">
-                      Nannari: {item.composition.nannari}, Lemon:{" "}
-                      {item.composition.lemon}
-                    </p>
-                    <p className="mt-2 font-semibold text-black">
-                      {formatINR(item.pricePerPack)}
-                    </p>
-                    <button
-                      className="text-red-500 text-sm mt-2"
-                      onClick={() => dispatch(removeFromCart(item.id))}
-                    >
-                      Remove item
-                    </button>
+                    <p className="text-sm text-gray-600 mt-1">Nannari: {item?.composition?.nannari}, Lemon: {item?.composition?.lemon}</p>
+                    <p className="mt-2 font-semibold text-black">{formatINR(item.pricePerPack)}</p>
+                    <button className="text-red-500 text-sm mt-2" onClick={() => dispatch(removeFromCart(item.id))}>Remove item</button>
                   </div>
                 </div>
 
                 <div className="flex items-center flex-col gap-3 space-x-4">
-                  <div className="text-lg text-right w-full font-semibold">
-                    {formatINR(item.totalPrice)}
-                  </div>
+                  <div className="text-lg text-right w-full font-semibold">{formatINR(item.totalPrice)}</div>
                   <div className="flex items-center border border-[#aeaeae] rounded-lg">
                     <button
-                      onClick={() =>
-                        dispatch(updateQuantity({ id: item.id, delta: -1 }))
-                      }
+                      onClick={() => dispatch(updateQuantity({ id: item.id, delta: -1 }))}
                       className="px-3 py-1 text-xl cursor-pointer"
                       disabled={item.quantity <= 1}
                     >
@@ -133,9 +143,7 @@ const Cart = () => {
                     </button>
                     <span className="px-3 py-1">{item.quantity}</span>
                     <button
-                      onClick={() =>
-                        dispatch(updateQuantity({ id: item.id, delta: 1 }))
-                      }
+                      onClick={() => dispatch(updateQuantity({ id: item.id, delta: 1 }))}
                       className="px-3 py-1 text-xl cursor-pointer"
                     >
                       +
@@ -148,7 +156,7 @@ const Cart = () => {
         </div>
 
         {/* Right side */}
-        {cart.length > 0 && (
+        {cart && cart.length > 0 && (
           <div className="bg-gray-50 rounded-xl p-6 h-fit">
             <h3 className="text-2xl font-bold mb-4">Cart Totals</h3>
             <div className="flex justify-between text-gray-700 text-sm mb-2">

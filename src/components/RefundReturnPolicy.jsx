@@ -9,20 +9,19 @@ const RefundReturnPolicy = () => {
       <div className="absolute top-0 z-50 w-full bg-[#FE5E33]">
         <Header />
       </div>
-
-    <div className='bg-[#FFEFEA]'>
-    <div className="max-w-3xl mx-auto p-4 sm:p-6 md:p-8 font-sans text-gray-900 mt-20 bg-[#FFEFEA]">
+    <div className='bg-[#FFEFEA] pb-5 px-3 md:h-[80dvh]'>
+    <div className="max-w-6xl mx-auto  font-sans text-gray-900 pt-30">
       <header className="mb-8">
-        <h2 className="text-3xl font-bold leading-none mb-4">
+        <h2 className="text-4xl font-bold leading-none ">
            REFUND & RETURN POLICY
         </h2>
       </header>
-      <p className="mb-4 text-base leading-relaxed text-justify">At <strong>SIRIK Beveraage,</strong> customer satisfaction is our priority. We strive to ensure that you receive the highest quality products.</p>
+      <p className="mb-4 text-[16px] leading-relaxed text-justify">At <strong>SIRIK Beveraage,</strong> customer satisfaction is our priority. We strive to ensure that you receive the highest quality products.</p>
      <ul className="list-disc ml-5 space-y-2">
-       <li className="text-base leading-relaxed text-justify">We <strong>do not accept returns </strong>once an order is delivered.</li>
-        <li className="text-base leading-relaxed text-justify"><strong>Damaged or defective orders in transit</strong> will be resolved promptly. If your order arrives damaged, please contact us via email at <a href="#" class="text-blue-600 font-semibold hover:underline">team@sirikbeverages.com</a>. Our team will assist you and resolve the issue<strong> within 2-3 working days.</strong></li>
+       <li className="text-[16px] leading-relaxed text-justify">We <strong>do not accept returns </strong>once an order is delivered.</li>
+        <li className="text-[16px] leading-relaxed text-justify"><strong>Damaged or defective orders in transit</strong> will be resolved promptly. If your order arrives damaged, please contact us via email at <a href="#" class="text-blue-600 font-semibold hover:underline">team@sirikbeverages.com</a>. Our team will assist you and resolve the issue<strong> within 2-3 working days.</strong></li>
      </ul>
-     <p className="mb-4 text-base leading-relaxed text-justify">For any further queries or assistance, reach out to us at  <a href="#" class="text-blue-600 font-semibold hover:underline">team@sirikbeverages.com</a>.</p>
+     <p className="mt-4 text-[16px] leading-relaxed text-justify">For any further queries or assistance, reach out to us at  <a href="mailto:team@sirikbeverages.com" class="text-blue-600 font-semibold hover:underline">team@sirikbeverages.com</a>.</p>
     </div>
     </div>
 
